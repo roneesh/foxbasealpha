@@ -19,7 +19,7 @@ User
   id, Name:string, email:string
 
 Micropost
-  id, content:string user_id:integer, alpha_id:integer
+  id, content:string user_id:integer, alpha_id:integer, lat:decimal, lng:decimal
 
 Alpha
   id, Name:string, origin_point_latitude:decmial, origin_point_longitude:decimal, public:boolean (default: false), radius:decimal (a radius from the origin point in miles, used to extrapolate other lat/lng end points)
