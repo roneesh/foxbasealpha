@@ -19,8 +19,20 @@
     <%= f.text_field :content %>
   </div>
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id, value: @user_id %>
+    <%#= f.label :user_id %><br />
+    <%#= f.text_field :user_id, value: @user_id %>
+  </div>
+  <div class="field">
+    <%= f.collection_select :alpha_id, @alphas, :id, :name %>
+    <%= f.label :alpha_id, "Upload to Alpha" %><br />
+    <%#= f.text_field :alpha_id %>
+  </div>
+  <div class="field">
+    <%= f.label :anonymous, "Post anonymously" %>
+    <%= f.check_box :anonymous, value: true %>
+  </div>
+
+  <div id="message_location">
   </div>
   <div class="actions">
     <%= f.submit %>

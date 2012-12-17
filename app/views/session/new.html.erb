@@ -1,14 +1,18 @@
 <h1>Enter Fox Base Alpha</h1>
 
-<%= form_tag 'session/create' do %>
+<%= form_tag session_create_url do %>
 	
-	<theader>Login</theader>
+	<p><theader>Login</theader></p>
 	
+	<p>
 	<%= label_tag :email, "Email:" %>
 	<%= text_field_tag :email %>
+	</p>
 
+	<p>
 	<%= label_tag :password, "Password:" %>
 	<%= password_field_tag :password %>
+	</p>
 
 	<%= submit_tag "Login as user" %>
 	<%= link_to "Not a user? Sign-up", new_user_url %>

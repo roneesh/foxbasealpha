@@ -7,6 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<% if flash[:message] %>
+		<h3><%= flash[:message] %> </h3>
+	<% end %>
+	<% if session[:user_id] %>
+		<%= link_to "Logout", session_destroy_url %>
+	<% else %>
+		<%= link_to "Log in", session_new_url %>
+	<%end> %>
 
 <%= yield %>
 

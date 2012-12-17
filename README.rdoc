@@ -6,6 +6,15 @@ Running Notes:
 Fox Base Alpha
 
 - A communications platform for sending Geo-tagged micro-posts
+- A user sends out a message that has a lat/lng coordinates attached
+- That message is also part of an alpha
+- An alpha is a bank of messages
+- An alpha is public or private
+	- Any user can send to a public alpha
+	- Private alphas only allow certain users
+- A user can create an alpha
+- User 0 is the public user
+
 
 
 10676
@@ -30,7 +39,7 @@ ASSOCIATIONS:
 User h_m microposts
 User b_t alpha
 
-Alpha h_m Microposts
+Alpha h_m Users
 
 Micropost b_t Alpha
 Micropost b_t User

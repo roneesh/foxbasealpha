@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @alpha.name %>
+</p>
+
+<p>
+  <b>Microposts:</b>
+	<ul>
+	  <% @microposts.each do |micropost_object| %>
+		<li>
+		 <% if micropost_object.anonymous %>
+		 	 <p>Anonymous says... </p>
+		 <% else %>
+			 <p><%= link_to micropost_object.user.handle, user_microposts_path(micropost_object.user_id) %> says...</p>
+		 <%end%>
+		 <p><%= micropost_object.content %></p>
+		</li>
+	  <% end %>
+	</ul>
+
+
+<%= link_to 'Edit', edit_alpha_path(@alpha) %> |
+<%= link_to 'Back', alphas_path %>

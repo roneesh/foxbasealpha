@@ -1,5 +1,7 @@
 Foxbasealpha::Application.routes.draw do
   
+  
+
   root :to => 'Session#new'
 
   get "session/new"
@@ -9,6 +11,10 @@ Foxbasealpha::Application.routes.draw do
   get "session/destroy"
 
   resources :users do
+    resources :microposts
+  end
+
+  resources :alphas do
     resources :microposts
   end
   # The priority is based upon order of creation:

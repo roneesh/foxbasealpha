@@ -26,6 +26,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/new.json
   def new
     @micropost = Micropost.new
+    @alphas = Alpha.order("name asc")
     @user_id = session[:user_id]
 
     respond_to do |format|
@@ -44,6 +45,7 @@ class MicropostsController < ApplicationController
   # POST /microposts.json
   def create
     @micropost = Micropost.new(params[:micropost])
+    @micropost.user_id = session[:user_id]
 
     respond_to do |format|
       if @micropost.save

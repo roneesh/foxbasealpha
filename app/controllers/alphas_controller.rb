@@ -1,0 +1,84 @@
+class AlphasController < ApplicationController
+  # GET /alphas
+  # GET /alphas.json
+  def index
+    @alphas = Alpha.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @alphas }
+    end
+  end
+
+  # GET /alphas/1
+  # GET /alphas/1.json
+  def show
+    @alpha = Alpha.find(params[:id])
+    @microposts = @alpha.microposts
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @alpha }
+    end
+  end
+
+  # GET /alphas/new
+  # GET /alphas/new.json
+  def new
+    @alpha = Alpha.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @alpha }
+    end
+  end
+
+  # GET /alphas/1/edit
+  def edit
+    @alpha = Alpha.find(params[:id])
+  end
+
+  # POST /alphas
+  # POST /alphas.json
+  def create
+    @alpha = Alpha.new(params[:alpha])
+
+    respond_to do |format|
+      if @alpha.save
+        format.html { redirect_to @alpha, notice: 'Alpha was successfully created.' }
+        format.json { render json: @alpha, status: :created, location: @alpha }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @alpha.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /alphas/1
+  # PUT /alphas/1.json
+  def update
+    @alpha = Alpha.find(params[:id])
+
+    respond_to do |format|
+      if @alpha.update_attributes(params[:alpha])
+        format.html { redirect_to @alpha, notice: 'Alpha was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @alpha.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /alphas/1
+  # DELETE /alphas/1.json
+  def destroy
+    @alpha = Alpha.find(params[:id])
+    @alpha.destroy
+
+    respond_to do |format|
+      format.html { redirect_to alphas_url }
+      format.json { head :no_content }
+    end
+  end
+end
