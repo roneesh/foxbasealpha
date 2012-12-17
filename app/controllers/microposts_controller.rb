@@ -25,6 +25,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/new.json
   def new
     @micropost = Micropost.new
+    @user_id = params[:user_id]
 
     respond_to do |format|
       format.html # new.html.erb
