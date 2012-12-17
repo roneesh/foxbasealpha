@@ -2,7 +2,8 @@ class MicropostsController < ApplicationController
   # GET /microposts
   # GET /microposts.json
   def index
-    @microposts = Micropost.all
+    @user = User.find_by_id(session[:user_id])
+    @microposts = @user.microposts
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +26,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/new.json
   def new
     @micropost = Micropost.new
-    @user_id = params[:user_id]
+    @user_id = session[:user_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +37,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/1/edit
   def edit
     @micropost = Micropost.find(params[:id])
+    @user_id = @micropost.user_id
   end
 
   # POST /microposts
@@ -45,7 +47,7 @@ class MicropostsController < ApplicationController
 
     respond_to do |format|
       if @micropost.save
-        format.html { redirect_to @micropost, notice: 'Micropost was successfully created.' }
+        format.html { redirect_to user_microposts_path(@micropost.user.id), notice: 'Micropost was successfully created.' }
         format.json { render json: @micropost, status: :created, location: @micropost }
       else
         format.html { render action: "new" }
@@ -61,7 +63,7 @@ class MicropostsController < ApplicationController
 
     respond_to do |format|
       if @micropost.update_attributes(params[:micropost])
-        format.html { redirect_to @micropost, notice: 'Micropost was successfully updated.' }
+        format.html { redirect_to user_micropost_path(@micropost.user_id, @micropost.id), notice: 'Micropost was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -77,7 +79,7 @@ class MicropostsController < ApplicationController
     @micropost.destroy
 
     respond_to do |format|
-      format.html { redirect_to microposts_url }
+      format.html { redirect_to user_microposts_path(@micropost.user_id) }
       format.json { head :no_content }
     end
   end
