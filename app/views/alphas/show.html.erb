@@ -6,6 +6,15 @@
 </p>
 
 <p>
+  <b>Protection status:</b>
+  <% if @alpha.public %>
+  	Public
+  <% else %>
+  	Private
+  <% end %>
+</p>
+
+<p>
   <b>Microposts:</b>
 	<ul>
 	  <% @microposts.each do |micropost_object| %>
