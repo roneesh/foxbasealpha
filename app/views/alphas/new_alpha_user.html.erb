@@ -1,0 +1,20 @@
+<h1>New alpha user</h1>
+
+<%= form_for @whitelist, :url => "/alphas/#{@alpha_id}/user/create", :method => :post do |f| %>
+
+  <div class="field">
+    <%= f.hidden_field :alpha_id, value: @alpha_id  %>
+  </div>
+  <div class="field">
+  	<%= f.label :user_id, "Add a user" %><br />
+    <%= f.collection_select :user_id, @users, :id, :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Add user to Whitelist" %>
+  </div>
+<% end %>
+
+<%#= link_to 'Show', user_micropost_path(@user_id, @micropost.id) %> 
+<%#= link_to 'User Microposts', user_microposts_path(@user_id) %>
+<%#= link_to 'Back', alphas_path %>
+

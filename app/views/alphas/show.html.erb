@@ -14,6 +14,22 @@
   <% end %>
 </p>
 
+<% if !@alpha.public  %>
+ <p>
+  <b> Whitelisted Users:</b>
+   <% if @whitelist.count >= 1 %>
+    <ul>
+     <% @whitelist.each do |whitelist_entry| %>
+      <li><%= whitelist_entry.user_id %></li>
+     <%end%>
+    </ul>
+   <%else%>
+    None
+   <%end%>
+ </p>
+<%end%>
+
+
 <p>
   <b>Microposts:</b>
 	<ul>
@@ -29,6 +45,8 @@
 	  <% end %>
 	</ul>
 
-
+<% if !@alpha.public %>
+	<%= link_to 'Add User', new_alpha_user_path(@alpha.id) %> |
+<%end%>
 <%= link_to 'Edit', edit_alpha_path(@alpha) %> |
 <%= link_to 'Back', alphas_path %>

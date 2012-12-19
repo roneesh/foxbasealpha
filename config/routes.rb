@@ -17,6 +17,12 @@ Foxbasealpha::Application.routes.draw do
   resources :alphas do
     resources :microposts
   end
+
+  get '/alphas/:alpha_id/user/new' => "Alphas#new_alpha_user", :as => "new_alpha_user"
+
+  post '/alphas/:alpha_id/user/create' => 'Alphas#new_alpha_user_create'
+
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

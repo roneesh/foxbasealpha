@@ -15,6 +15,7 @@ class AlphasController < ApplicationController
   def show
     @alpha = Alpha.find(params[:id])
     @microposts = @alpha.microposts
+    @whitelist = Whitelist.where(alpha_id: @alpha.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -81,4 +82,15 @@ class AlphasController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def new_alpha_user
+    @whitelist = Whitelist.new
+    @alpha_id = params[:alpha_id]
+    @users = User.all
+  end
+
+  def new_alpha_user_create
+    Whitelist.create(user_id: session[:user_id], alpha_id: params[:alpha_id])
+  end
+
 end
