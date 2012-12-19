@@ -2,7 +2,9 @@ class AlphasController < ApplicationController
   # GET /alphas
   # GET /alphas.json
   def index
-    @alphas = Alpha.all
+    whitelist = Whitelist.where(user_id: session[:user_id])
+    @public_alphas = Alpha.where(:public => true)
+    @private_alphas = Alpha.where(:public => false)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,7 +45,8 @@ class AlphasController < ApplicationController
   # POST /alphas.json
   def create
     @alpha = Alpha.new(params[:alpha])
-
+    @alpha.admin_id = session[:user_id]
+    
     respond_to do |format|
       if @alpha.save
         format.html { redirect_to @alpha, notice: 'Alpha was successfully created.' }
@@ -91,6 +94,11 @@ class AlphasController < ApplicationController
 
   def new_alpha_user_create
     Whitelist.create(user_id: session[:user_id], alpha_id: params[:alpha_id])
+
+    respond_to do |format|
+      format.html { redirect_to alpha_url(params[:alpha_id])}
+    end
   end
+
 
 end
