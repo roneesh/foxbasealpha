@@ -2,9 +2,12 @@ class AlphasController < ApplicationController
   # GET /alphas
   # GET /alphas.json
   def index
-    whitelist = Whitelist.where(user_id: session[:user_id])
+    whitelist = Whitelist.where(user_id: session[:user_id]).to_a
     @public_alphas = Alpha.where(:public => true)
-    @private_alphas = Alpha.where(:public => false)
+    @private_alphas = []
+    whitelist.each do |whitelist_entry|
+      @private_alphas << Alpha.find_by_id(whitelist_entry.alpha_id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -46,7 +49,7 @@ class AlphasController < ApplicationController
   def create
     @alpha = Alpha.new(params[:alpha])
     @alpha.admin_id = session[:user_id]
-    
+
     respond_to do |format|
       if @alpha.save
         format.html { redirect_to @alpha, notice: 'Alpha was successfully created.' }

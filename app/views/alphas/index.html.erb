@@ -14,8 +14,13 @@
     <td><%= alpha.name %></td>
     <td>Public</td>
     <td><%= link_to 'Show', alpha %></td>
-    <td><%= link_to 'Edit', edit_alpha_path(alpha) %></td>
-    <td><%= link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%# if alpha.admin_id == session[:user_id] %>
+      <td><%= link_to 'Edit', edit_alpha_path(alpha) %></td>
+      <td><%= link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%# else %>
+      <!-- <td></td>
+      <td></td> -->
+    <%# end %>
   </tr>
 <% end %>
 
@@ -24,8 +29,13 @@
     <td><%= alpha.name %></td>
     <td>Private</td>
     <td><%= link_to 'Show', alpha %></td>
-    <td><%= link_to 'Edit', edit_alpha_path(alpha) %></td>
-    <td><%= link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+     <%# if alpha.admin_id == session[:user_id] %>
+      <td><%= link_to 'Edit', edit_alpha_path(alpha) %></td>
+      <td><%= link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%# else %>
+      <!-- <td></td>
+      <td></td> -->
+    <%# end %>
   </tr>
 <% end %>
 
