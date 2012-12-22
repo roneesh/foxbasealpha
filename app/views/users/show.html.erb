@@ -22,7 +22,7 @@
 
 	<p><%= user_micropost.content %></p>
 
-	<p> on <%= link_to user_micropost.alpha.name, alpha_url(user_micropost.alpha.id) %>
+	<p> on <%= link_to user_micropost.alpha.name, alpha_url(user_micropost.alpha.id) %> at <%= user_micropost.created_at %>
 	<% end %>
 </li>
 </ol>

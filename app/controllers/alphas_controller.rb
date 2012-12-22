@@ -79,7 +79,7 @@ class AlphasController < ApplicationController
   def create
     user = User.find_by_id(session[:user_id])
     @alpha = Alpha.new(params[:alpha])
-    @alpha.admin_id = User.find_by_email(user.email)
+    @alpha.admin_id = User.find_by_email(user.email).id
 
     respond_to do |format|
       if @alpha.save
