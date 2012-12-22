@@ -1,10 +1,10 @@
 class Alpha < ActiveRecord::Base
-  attr_accessible :name, :public
+  attr_accessible :name, :public, :admin_id, :isprivate
 
   has_many :microposts
 
   has_many :whitelists
-  has_many :users, :through => :whitelist
+  has_many :users, :through => :whitelists
 
   after_create :add_creator_to_whitelist
 

@@ -7,20 +7,25 @@
 
 <p>
   <b>Protection status:</b>
-  <% if @alpha.public %>
-  	Public
-  <% else %>
+  <% if @alpha.isprivate %>
   	Private
+  <% else %>
+  	Public
   <% end %>
 </p>
 
-<% if !@alpha.public  %>
+<% if @alpha.isprivate  %>
  <p>
   <b> Whitelisted Users:</b>
-   <% if @whitelist.count >= 1 %>
+   <% if @users.count >= 1 %>
     <ul>
-     <% @whitelist.each do |whitelist_entry| %>
-      <li><%= whitelist_entry.user_id %></li>
+     <% @users.each do |user_entry| %>
+      <li>
+        <%= user_entry.name %>
+          <% if user_entry.id == @alpha.admin_id %>
+            -- admin
+          <% end %>
+      </li>
      <%end%>
     </ul>
    <%else%>
@@ -45,7 +50,7 @@
 	  <% end %>
 	</ul>
 
-<% if !@alpha.public %>
+<% if @alpha.isprivate %>
 	<%= link_to 'Add User', new_alpha_user_path(@alpha.id) %> |
 <%end%>
 <%= link_to 'Edit', edit_alpha_path(@alpha) %> |

@@ -2,11 +2,14 @@ class AlphasController < ApplicationController
   # GET /alphas
   # GET /alphas.json
   def index
+    @public_alphas = Alpha.where(:isprivate => false)
+
     whitelist = Whitelist.where(user_id: session[:user_id]).to_a
-    @public_alphas = Alpha.where(:public => true)
     @private_alphas = []
     whitelist.each do |whitelist_entry|
-      @private_alphas << Alpha.find_by_id(whitelist_entry.alpha_id)
+      if Alpha.find_by_id(whitelist_entry.alpha_id).isprivate == true
+        @private_alphas << Alpha.find_by_id(whitelist_entry.alpha_id)
+      end
     end
 
     respond_to do |format|
@@ -20,7 +23,12 @@ class AlphasController < ApplicationController
   def show
     @alpha = Alpha.find(params[:id])
     @microposts = @alpha.microposts
-    @whitelist = Whitelist.where(alpha_id: @alpha.id)
+    whitelist = Whitelist.where(alpha_id: @alpha.id)
+
+    @users = []
+    whitelist.each do |list_entry|
+      @users << User.find_by_id(list_entry.user_id)
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,8 +55,9 @@ class AlphasController < ApplicationController
   # POST /alphas
   # POST /alphas.json
   def create
+    user = User.find_by_id(session[:user_id])
     @alpha = Alpha.new(params[:alpha])
-    @alpha.admin_id = session[:user_id]
+    @alpha.admin_id = User.find_by_email(user.email)
 
     respond_to do |format|
       if @alpha.save
@@ -96,7 +105,7 @@ class AlphasController < ApplicationController
   end
 
   def new_alpha_user_create
-    Whitelist.create(user_id: session[:user_id], alpha_id: params[:alpha_id])
+    Whitelist.create(user_id: params[:whitelist][:user_id], alpha_id: params[:whitelist][:alpha_id])
 
     respond_to do |format|
       format.html { redirect_to alpha_url(params[:alpha_id])}

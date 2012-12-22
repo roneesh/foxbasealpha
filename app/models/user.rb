@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   validates :handle, :uniqueness => true, :on => :create
   validates :email, :uniqueness => true, :on => :update
   has_many :microposts
+  has_many :whitelists
 
   has_secure_password
 

@@ -1,3 +1,9 @@
+CURRENT TO-DO
+
+1. Run rake db:drop, fix alpha migration to have boolean private, default set to false, and also have alpha have admin_id
+
+
+
 Running Notes:
 
 - For now all alphas are public, private alphas to be added after mvp launch

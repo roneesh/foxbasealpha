@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217184615) do
+ActiveRecord::Schema.define(:version => 20121222000548) do
 
   create_table "alphas", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.boolean  "public",     :default => true
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "admin_id"
+    t.boolean  "isprivate",  :default => false
   end
 
   create_table "microposts", :force => true do |t|
@@ -38,6 +39,13 @@ ActiveRecord::Schema.define(:version => 20121217184615) do
     t.string   "handle"
     t.string   "password_digest"
     t.boolean  "admin",           :default => false
+  end
+
+  create_table "whitelists", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "alpha_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
