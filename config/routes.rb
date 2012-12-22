@@ -15,7 +15,7 @@ Foxbasealpha::Application.routes.draw do
   end
 
   resources :alphas do
-    resources :microposts
+    # resources :microposts
   end
 
   get '/alphas/:alpha_id/user/new' => "Alphas#new_alpha_user", :as => "new_alpha_user"

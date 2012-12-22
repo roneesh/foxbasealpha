@@ -1,6 +1,27 @@
 class AlphasController < ApplicationController
   # GET /alphas
   # GET /alphas.json
+
+  # before_filter :ensure_logged_in, except: [:new, :create]
+  # before_filter :ensure_correct_user_type
+  before_filter :ensure_admin, only: [:edit, :update, :destroy ]
+  before_filter :ensure_admin_for_whitelisting, only: [:new_alpha_user, :new_alpha_user_create]
+
+  def ensure_admin
+    if session[:user_id] != Alpha.find_by_id(params[:id]).admin_id
+      flash[:message] = "Only an Alpha's creator can alter an Alpha's properties"
+      redirect_to alphas_url
+    end
+  end
+
+  def ensure_admin_for_whitelisting
+    if session[:user_id] != Alpha.find_by_id(params[:alpha_id]).admin_id
+      flash[:message] = "Only an Alpha's creator can alter an Alpha's properties"
+      redirect_to alpha_url(params[:alpha_id])
+    end
+  end
+
+
   def index
     @public_alphas = Alpha.where(:isprivate => false)
 
@@ -22,6 +43,7 @@ class AlphasController < ApplicationController
   # GET /alphas/1.json
   def show
     @alpha = Alpha.find(params[:id])
+    @admin = User.find_by_id(@alpha.admin_id)
     @microposts = @alpha.microposts
     whitelist = Whitelist.where(alpha_id: @alpha.id)
 
