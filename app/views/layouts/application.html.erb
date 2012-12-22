@@ -13,7 +13,8 @@
 	<% if session[:user_id] %>
 		<%= link_to "Logout", session_destroy_url %> |
 		<%= link_to "Alphas", alphas_url %> |
-		<%= link_to "New Micropost", new_user_micropost_url(session[:user_id]) %> 
+		<%= link_to "New Micropost", new_user_micropost_url(session[:user_id]) %> |
+		<%= link_to "User Dashboard", user_url(session[:user_id]) %>
 
 	<% else %>
 		<%= link_to "Log in", session_new_url %>

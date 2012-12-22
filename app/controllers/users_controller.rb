@@ -1,6 +1,16 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+
+  before_filter :ensure_correct_user, only: [:show, :edit, :update, :destroy]
+
+  def ensure_correct_user
+      if session[:user_id] != params[:id].to_i
+        flash[:message] = "You are not authorized to see/edit/delete any other User's information."
+        redirect_to user_url(session[:user_id])
+    end
+  end
+
   def index
     @users = User.all
 
@@ -13,7 +23,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
+    @user_microposts = Micropost.where(user_id: session[:user_id])
+    @alphas_for_microposts = []
+
+    @user_microposts.each do |user_micropost|
+      @alphas_for_microposts << Alpha.find_by_id(user_micropost.alpha_id)
+    end
 
     respond_to do |format|
       format.html # show.html.erb

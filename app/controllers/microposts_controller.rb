@@ -1,9 +1,19 @@
 class MicropostsController < ApplicationController
   # GET /microposts
   # GET /microposts.json
+
+  before_filter :on_the_whitelist, only: [:create]
+
+  def on_the_whitelist
+    if Whitelist.where(user_id: session[:user_id], alpha_id: params["micropost"]["alpha_id"]).is_empty?
+      flash[:message] = "This is a private Alpha and you are not on it's authoerized posting list."
+      redirect_to new_user_micropost_url(session[:user_id])
+    end
+  end
+
   def index
     @user = User.find_by_id(session[:user_id])
-    @microposts = @user.microposts
+    @user_microposts = Microposts.where(user_id: session[:user_id]).limit(100)
 
     respond_to do |format|
       format.html # index.html.erb

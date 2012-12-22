@@ -10,6 +10,23 @@
   <%= @user.email %>
 </p>
 
+<b>Your last 100 Microposts:</b>
+<ol>
+<% @user_microposts.each do |user_micropost| %>
+	<li>
+	<% if user_micropost.anonymous %>
+		<p>You anonymously said... </p>
+	<% else %>
+	 	<p>You said</p>
+	<%end%>
+
+	<p><%= user_micropost.content %></p>
+
+	<p> on <%= link_to user_micropost.alpha.name, alpha_url(user_micropost.alpha.id) %>
+	<% end %>
+</li>
+</ol>
+
 
 <%= link_to 'Edit User Information', edit_user_path(@user) %> 
 <%#= link_to 'Back', users_path %>
