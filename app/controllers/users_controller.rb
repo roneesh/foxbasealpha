@@ -3,7 +3,16 @@ class UsersController < ApplicationController
   # GET /users.json
 
   before_filter :ensure_correct_user, only: [:show, :edit, :update]
-  before_filter :ensure_site_admin, only: [:index, :new, :destroy]
+  before_filter :ensure_site_admin, only: [:index, :destroy]
+  before_filter :ensure_logged_in, except: [:new, :create]
+
+   def ensure_logged_in
+    if !session[:user_id]
+      flash[:message] = "You are not logged in, please log in."
+      redirect_to session_new_url
+      return
+    end
+  end
 
   def ensure_correct_user
       if session[:user_id] != params[:id].to_i
@@ -69,6 +78,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else

@@ -1,13 +1,10 @@
 CURRENT TO-DO
 
-1. Run rake db:drop, fix alpha migration to have boolean private, default set to false, and also have alpha have admin_id
-
-
+  1. Geolocate with HTML5
+  2. Geolocate with googlemaps API (seems more accurate than HTML5, but more complex to do).
+  3. Log-ins with Google ID
 
 Running Notes:
-
-- For now all alphas are public, private alphas to be added after mvp launch
-
 
 Fox Base Alpha
 
@@ -21,23 +18,20 @@ Fox Base Alpha
 - A user can create an alpha
 - User 0 is the public user
 
-
-
-10676
-
-
-
-
 MODELS:
 
 User
-  id, Name:string, email:string
+  id, Name:string, email:string, handle:string, password_digest:string, site_admin:boolean
 
 Micropost
-  id, content:string user_id:integer, alpha_id:integer, lat:decimal, lng:decimal
+  id, content:string user_id:integer, alpha_id:integer, lat:decimal, alpha_id:integer, anonymous:boolean
 
 Alpha
-  id, Name:string, origin_point_latitude:decmial, origin_point_longitude:decimal, public:boolean (default: false), radius:decimal (a radius from the origin point in miles, used to extrapolate other lat/lng end points)
+  id, name:string, origin_point_latitude:decmial, origin_point_longitude:decimal, isprivate:boolean (default: false), radius:decimal (a radius from the origin point in miles, used to extrapolate other lat/lng end points), admin_id:integer
+
+Whitelist
+  id, user_id:integer, alpha_id:integerUser
+
 
 
 ASSOCIATIONS:

@@ -3,17 +3,28 @@ class MicropostsController < ApplicationController
   # GET /microposts.json
 
   before_filter :on_the_whitelist, only: [:create]
+  before_filter :ensure_logged_in
+
+   def ensure_logged_in
+    if !session[:user_id]
+      flash[:message] = "You are not logged in, please log in."
+      redirect_to session_new_url
+      return
+    end
+  end
 
   def on_the_whitelist
-    if Whitelist.where(user_id: session[:user_id], alpha_id: params["micropost"]["alpha_id"]).is_empty?
+    if Alpha.find_by_id(params["micropost"]["alpha_id"]).isprivate 
+      if Whitelist.where(user_id: session[:user_id], alpha_id: params["micropost"]["alpha_id"]).empty?
       flash[:message] = "This is a private Alpha and you are not on it's authoerized posting list."
       redirect_to new_user_micropost_url(session[:user_id])
+      end
     end
   end
 
   def index
     @user = User.find_by_id(session[:user_id])
-    @user_microposts = Microposts.where(user_id: session[:user_id]).limit(100)
+    @user_microposts = Micropost.where(user_id: session[:user_id]).limit(100)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +36,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/1.json
   def show
     @micropost = Micropost.find(params[:id])
+    @user = User.find_by_id(@micropost.user_id)
 
     respond_to do |format|
       format.html # show.html.erb

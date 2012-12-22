@@ -24,7 +24,7 @@ puts "Whitelist completely erased!"
 
 users = [
 	{name: "Roneesh Vashisht", email: "roneesh@gmail.com", handle: "Ronnie", password: "1", password_confirmation: "1", site_admin: true},
-	{name: "Password User", email: "password@example.com", handle: "Passy", password: "1", password_confirmation: "1"}
+	{name: "Password User", email: "password@example.com", handle: "Passy", password: "1", password_confirmation: "1", site_admin: false}
 ]
 
 puts "Creating users..."

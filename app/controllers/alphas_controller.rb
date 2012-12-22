@@ -6,6 +6,15 @@ class AlphasController < ApplicationController
   # before_filter :ensure_correct_user_type
   before_filter :ensure_admin, only: [:edit, :update, :destroy ]
   before_filter :ensure_admin_for_whitelisting, only: [:new_alpha_user, :new_alpha_user_create]
+  before_filter :ensure_logged_in
+
+   def ensure_logged_in
+    if !session[:user_id]
+      flash[:message] = "You are not logged in, please log in."
+      redirect_to session_new_url
+      return
+    end
+  end
 
   def ensure_admin
     if session[:user_id] != Alpha.find_by_id(params[:id]).admin_id
