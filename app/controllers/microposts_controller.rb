@@ -26,16 +26,18 @@ class MicropostsController < ApplicationController
   # GET /microposts/new.json
   def new
     @micropost = Micropost.new
-    # @alphas = Alpha.order("name asc")
     @user_id = session[:user_id]
+    public_alphas = Alpha.where(:isprivate => false)
 
     whitelist = Whitelist.where(user_id: session[:user_id]).to_a
-    public_alphas = Alpha.where(:public => true)
     private_alphas = []
     whitelist.each do |whitelist_entry|
-      private_alphas << Alpha.find_by_id(whitelist_entry.alpha_id)
+      if Alpha.find_by_id(whitelist_entry.alpha_id).isprivate == true
+        private_alphas << Alpha.find_by_id(whitelist_entry.alpha_id)
+      end
     end
-    @alphas = (public_alphas + private_alphas)
+
+    @alphas = public_alphas + private_alphas 
 
     respond_to do |format|
       format.html # new.html.erb

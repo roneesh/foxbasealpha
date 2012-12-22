@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222000548) do
+ActiveRecord::Schema.define(:version => 20121222022431) do
 
   create_table "alphas", :force => true do |t|
     t.string   "name"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20121222000548) do
     t.string   "handle"
     t.string   "password_digest"
     t.boolean  "admin",           :default => false
+    t.boolean  "site_admin",      :default => false
   end
 
   create_table "whitelists", :force => true do |t|

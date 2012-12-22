@@ -8,7 +8,11 @@ class SessionController < ApplicationController
 	    if @user && @user.authenticate(params[:password])
 	      session[:user_id] = @user.id
 	      flash[:message] = "Fox Base Alpha Connect Initiated"
-	      redirect_to users_path
+	      if @user.site_admin
+		      redirect_to users_path
+		   else
+		   	  redirect_to user_url(session[:user_id])
+		   end
 	    else
 	      flash[:message] = "Invalid login e-mail or password"
 	      redirect_to session_new_url

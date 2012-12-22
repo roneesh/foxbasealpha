@@ -17,12 +17,10 @@
   </div>
 
   <div class="field">
-    <%= f.label(:public, "Alpha is Public") %>
-    <%= f.radio_button(:public, true) %>
-    <%= f.label(:public, "Alpha is Protected") %>
-    <%= f.radio_button(:public, false) %>
-    
-
+    <%= f.label(:isprivate, "Make Alpha Private") %>
+    <%= f.radio_button(:isprivate, true) %>
+    <%= f.label(:isprivate, "Make Alpha Public") %>
+    <%= f.radio_button(:isprivate, false) %>
   </div>
 
   <div class="actions">
