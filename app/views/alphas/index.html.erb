@@ -32,7 +32,11 @@
     <td><%= link_to 'Show', alpha %></td>
     <% if alpha.admin_id == session[:user_id] %>
       <td><%= link_to 'Edit', edit_alpha_path(alpha) %></td>
-      <td><%= link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% if alpha.admin_id == session[:user_id] %>
+        -- you are admin
+        <%end%>
+      </td>
     <%end%>
     <%# else %>
       <!-- <td></td>

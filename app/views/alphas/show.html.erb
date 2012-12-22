@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Alpha Name:</b>
   <%= @alpha.name %>
 </p>
 
 <p>
-  <b>Protection status:</b>
+  <b>Alpha Protection status:</b>
   <% if @alpha.isprivate %>
   	Private
   <% else %>
@@ -42,7 +42,7 @@
 
 
 <p>
-  <b>Microposts:</b>
+  <b>Alpha Microposts:</b>
 	<ul>
 	  <% @microposts.each do |micropost_object| %>
 		<li>
