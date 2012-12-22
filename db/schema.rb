@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222043429) do
+ActiveRecord::Schema.define(:version => 20121222160226) do
 
   create_table "alphas", :force => true do |t|
     t.string   "name"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20121222043429) do
     t.integer  "user_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.decimal  "lat"
     t.integer  "alpha_id"
     t.boolean  "anonymous",  :default => false
   end
