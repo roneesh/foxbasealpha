@@ -2,7 +2,6 @@ class Alpha < ActiveRecord::Base
   attr_accessible :name, :public, :admin_id, :isprivate
 
   has_many :microposts
-
   has_many :whitelists
   has_many :users, :through => :whitelists
 

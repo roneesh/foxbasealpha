@@ -10,13 +10,12 @@ Fox Base Alpha
 
 - A communications platform for sending Geo-tagged micro-posts
 - A user sends out a message that has a lat/lng coordinates attached
-- That message is also part of an alpha
-- An alpha is a bank of messages
-- An alpha is public or private
-	- Any user can send to a public alpha
-	- Private alphas only allow certain users
-- A user can create an alpha
-- User 0 is the public user
+- That message is also part of an alpha 
+- An alpha is a bank of messages *DONE*
+- An alpha is public or private *DONE*
+- Any user can send to a public alpha *DONE*
+- Private alphas only allow certain users *DONE*
+- A user can create an alpha *DONE*
 
 MODELS:
 
@@ -33,27 +32,36 @@ Whitelist
   id, user_id:integer, alpha_id:integerUser
 
 
-
 ASSOCIATIONS:
 
 User h_m microposts
+User h_m whitelists
 User b_t alpha
 
-Alpha h_m Users
 
-Micropost b_t Alpha
-Micropost b_t User
+Alpha h_m users, through whitelists
+Alpha h_m whitelists
+Alpha h_m microposts
+
+Micropost b_t alpha
+Micropost b_t user
+
+Whitelist b_t alpha
+Whitelist b_t user
 
 VALIDATIONS:
 
 User
-  Must have name/email to signup
+  Must have name/email to signup *DONE*
 
 Micropost
-  must have content to add to alpha
-  must be associated to an alpha
+  must have content to add to alpha *DONE*
+  must be associated to an alpha *DONE*
   must be able to detect lat/lng before post
 
 Alpha
   rnages will start out circular, with a 
   must have range specified
+
+Whitelist
+  validates user_id within scope of alpha_id, in that all whitelist entries with a certain alpha_id can't have two entries with the same user_id. *DONE*
