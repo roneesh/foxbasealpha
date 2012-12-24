@@ -12,6 +12,7 @@ class Alpha < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :isprivate
 
+  scope :private_alphas, where("isprivate == ?", true)
 
   def add_creator_to_whitelist
   	Whitelist.create(user_id: self.admin_id, alpha_id: self.id)
