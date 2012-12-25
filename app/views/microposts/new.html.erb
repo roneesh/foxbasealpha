@@ -35,8 +35,14 @@
     <%= f.check_box :anonymous, value: true %>
   </div>
 
-  <div id="message_location">
-  
+  <div id="field">
+    <%= f.label :micropost_lat, "Micropost's latitude" %>
+    <%= f.text_field :micropost_lat%>
+  </div>
+
+  <div id="field">
+    <%= f.label :micropost_lng, "Micropost's longitude" %>
+    <%= f.text_field :micropost_lng%>
   </div>
   
   <div class="actions">
@@ -53,11 +59,12 @@
 
 
 <script>
+
 function success(position) {
-  var s = document.getElementById('messagelocation');
-  
-  s.innerHTML = "message will post to: " + position.coords.latitude + " latitude, and at: " + position.coords.longitude + " longitude";
-  s.className = 'success';  
+  var lat = document.getElementById('micropost_micropost_lat');
+  var lng = document.getElementById('micropost_micropost_lng')
+  lat.value = position.coords.latitude;
+  lng.value = position.coords.longitude;
 }
 
 function error(msg) {

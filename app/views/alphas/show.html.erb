@@ -52,6 +52,7 @@
 			 <p><%= link_to micropost_object.user.handle, user_microposts_path(micropost_object.user_id) %> says...</p>
 		 <%end%>
 		 <p><%= micropost_object.content %></p>
+     <p>Coordinates: <%=micropost_object.micropost_lat%>-lat/<%=micropost_object.micropost_lng%>-lng</p> 
 		</li>
 	  <% end %>
 	</ul>
