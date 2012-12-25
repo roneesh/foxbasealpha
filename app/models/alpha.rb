@@ -10,7 +10,6 @@ class Alpha < ActiveRecord::Base
   before_create :no_duplicate_entries
 
   validates_presence_of :name
-  validates_presence_of :isprivate
 
   scope :private_alphas, where("isprivate == ?", true)
 
