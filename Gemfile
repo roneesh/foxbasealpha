@@ -41,3 +41,6 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+# To pass variables from ruby to js views
+gem 'gon'

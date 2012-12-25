@@ -57,14 +57,19 @@
 
 <p id="messagelocation"></p>
 
+<article>
+  <p id="accuracy"></p>
+</article>
 
 <script>
 
 function success(position) {
   var lat = document.getElementById('micropost_micropost_lat');
   var lng = document.getElementById('micropost_micropost_lng')
+  var acc = document.getElementById('accuracy')
   lat.value = position.coords.latitude;
   lng.value = position.coords.longitude;
+  acc.innerHTML = "Accurate to " + position.coords.accuracy + " meters";
 }
 
 function error(msg) {
