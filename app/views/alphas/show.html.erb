@@ -79,21 +79,14 @@
 <script>
 
 var alpha_id = <%= @alpha.id %>;
-var url_string = "http://localhost:3000/alphas/" + alpha_id + ".json";
-$.get(url_string,
-   function(data){
-     $('body').append( "<br>MP1: " + data[0][0]["micropost_lat"] + "-lat " + data[0][0]["micropost_lng"] + "-lng "  + "<br>" ) // John
-              .append( "MP2: " + data[0][1]["micropost_lat"] + "-lat " + data[0][1]["micropost_lng"] + "-lng "  + "<br>" )
-              .append( "MP3: " + data[0][2]["micropost_lat"] + "-lat " + data[0][2]["micropost_lng"] + "-lng "  + "<br>" ) //  2pm
-     console.log(data);
-   }, "json");
-
-// function itworked(data) {
-//   var some_text = document.getElementById("map");
-//   var data_area = document.getElementById("data_a")
-//   some_text.innerHTML = "It Worked!";
-//   // $('data_area').prepend(data);
-//   alert(data);
-// };
+var url_string = "/alphas/" + alpha_id + ".json";
+var m = <%= @microposts.first.micropost_lat %>; 
+console.log(m)
+// $.get(url_string,
+//    function(data){
+//      $('body').append( "<br>MP1: " + data[0][0]["micropost_lat"] + "-lat " + data[0][0]["micropost_lng"] + "-lng"  + "<br>" )
+//               .append( "MP2: " + data[0][1]["micropost_lat"] + "-lat " + data[0][1]["micropost_lng"] + "-lng "  + "<br>" )
+//               .append( "MP3: " + data[0][2]["micropost_lat"] + "-lat " + data[0][2]["micropost_lng"] + "-lng "  + "<br>" );
+//    }, "json");
 
 </script>

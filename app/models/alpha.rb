@@ -25,6 +25,19 @@ class Alpha < ActiveRecord::Base
 
   end
 
+  def points
+    points = []
+    microposts = Micropost.where(alpha_id: self.id)
+
+    microposts.each do |micropost|
+      point = []
+      point[0] = micropost.micropost_lat
+      point[1] = micropost.micropost_lng
+
+      points << point
+    end
+  end
+
 
 
 end
