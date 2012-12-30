@@ -75,13 +75,23 @@
 <%end%>
 <%= link_to 'Back to Alphas', alphas_path %>
 
+<h1> <%= @js_microposts.class %> </h1>
 
 <script>
-
 var alpha_id = <%= @alpha.id %>;
 var url_string = "/alphas/" + alpha_id + ".json";
-var m = <%= @microposts.first.micropost_lat %>; 
-console.log(m)
+var mp_arr = [];
+
+<% @microposts.each do |micropost_object| %>
+  var point_holder = [];
+  point_holder[0] = <%= micropost_object.id %>;
+  point_holder[1] = "<%= micropost_object.content %>";
+  point_holder[2] = <%= micropost_object.micropost_lat %>;
+  point_holder[3] = <%= micropost_object.micropost_lng %>;
+  mp_arr.push(point_holder);
+  point_holder = [];
+<%end%>
+
 // $.get(url_string,
 //    function(data){
 //      $('body').append( "<br>MP1: " + data[0][0]["micropost_lat"] + "-lat " + data[0][0]["micropost_lng"] + "-lng"  + "<br>" )

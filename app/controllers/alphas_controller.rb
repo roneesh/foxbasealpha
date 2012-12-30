@@ -54,7 +54,13 @@ def show
   @alpha = Alpha.find(params[:id])
   @admin = User.find_by_id(@alpha.admin_id)
   @microposts = @alpha.microposts
+  @js_microposts= []
   whitelist = Whitelist.where(alpha_id: @alpha.id)
+
+  @microposts.each do |micropost_object|
+    micropost_object_json = micropost_object.to_json
+    @js_microposts << micropost_object_json
+  end
 
   @users = []
   whitelist.each do |list_entry|
