@@ -75,28 +75,51 @@
 <%end%>
 <%= link_to 'Back to Alphas', alphas_path %>
 
-<h1> <%= @js_microposts.class %> </h1>
+<article>
+  <p>Finding your location: <span id="status">checking...</span></p>
+</article>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <script>
-var alpha_id = <%= @alpha.id %>;
-var url_string = "/alphas/" + alpha_id + ".json";
-var mp_arr = [];
 
-<% @microposts.each do |micropost_object| %>
-  var point_holder = [];
-  point_holder[0] = <%= micropost_object.id %>;
-  point_holder[1] = "<%= micropost_object.content %>";
-  point_holder[2] = <%= micropost_object.micropost_lat %>;
-  point_holder[3] = <%= micropost_object.micropost_lng %>;
-  mp_arr.push(point_holder);
-  point_holder = [];
-<%end%>
+  var alpha_id = <%= @alpha.id %>;
+  var url_string = "/alphas/" + alpha_id + ".json";
+  var mp_arr = [];
 
-// $.get(url_string,
-//    function(data){
-//      $('body').append( "<br>MP1: " + data[0][0]["micropost_lat"] + "-lat " + data[0][0]["micropost_lng"] + "-lng"  + "<br>" )
-//               .append( "MP2: " + data[0][1]["micropost_lat"] + "-lat " + data[0][1]["micropost_lng"] + "-lng "  + "<br>" )
-//               .append( "MP3: " + data[0][2]["micropost_lat"] + "-lat " + data[0][2]["micropost_lng"] + "-lng "  + "<br>" );
-//    }, "json");
+  <% @microposts.each do |micropost_object| %>
+    var point_holder = [];
+    point_holder[0] = <%= micropost_object.id %>; 
+    point_holder[1] = "<%= micropost_object.content %>";
+    point_holder[2] = <%= micropost_object.micropost_lat %>;
+    point_holder[3] = <%= micropost_object.micropost_lng %>;
+    mp_arr.push(point_holder);
+    point_holder = [];
+  <% end %>
+
+  var mapcanvas = document.createElement('div');
+  mapcanvas.id = 'mapcanvas';
+  mapcanvas.style.height = '400px';
+  mapcanvas.style.width = '560px';
+    
+  document.querySelector('article').appendChild(mapcanvas);
+  
+  // var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var myOptions = {
+    zoom: 15,
+    center: latlng,
+    mapTypeControl: false,
+    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+  
+  var marker = new google.maps.Marker({
+      position: latlng, 
+      map: map, 
+      title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+  });
 
 </script>
+
+
