@@ -57,7 +57,8 @@ User
 Micropost
   must have content to add to alpha *DONE*
   must be associated to an alpha *DONE*
-  must be able to detect lat/lng before post
+  must be able to detect lat/lng before post *DONE*
+  post saves with lat/lng coords. *DONE*
 
 Alpha
   rnages will start out circular, with a 

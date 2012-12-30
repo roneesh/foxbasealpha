@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Foxbasealpha</title>
-  <%= include gon %>
+  <%# include gon %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -11,6 +11,7 @@
 	<% if flash[:message] %>
 		<h3><%= flash[:message] %> </h3>
 	<% end %>
+  <navigation>
 	<% if session[:user_id] %>
 		<%= link_to "Logout", session_destroy_url %> |
 		<%= link_to "Alphas", alphas_url %> |
@@ -20,6 +21,7 @@
 	<% else %>
 		<%= link_to "Log in", session_new_url %>
 	<%end> %>
+  </navigation>
 
 <%= yield %>
 

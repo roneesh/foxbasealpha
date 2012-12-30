@@ -61,11 +61,12 @@ def show
     @users << User.find_by_id(list_entry.user_id)
   end
 
-  gon.microposts = @microposts
+  @json_response = []
+  @json_response << @microposts
 
   respond_to do |format|
     format.html # show.html.erb
-    format.json { render json: @alpha }
+    format.json { render json: @json_response }
   end
 end
 
