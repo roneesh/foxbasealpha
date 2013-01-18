@@ -11,14 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225202758) do
+ActiveRecord::Schema.define(:version => 20130118230442) do
 
   create_table "alphas", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
     t.integer  "admin_id"
-    t.boolean  "isprivate",  :default => false
+    t.boolean  "isprivate",                                 :default => false
+    t.decimal  "alpha_lat",  :precision => 11, :scale => 8
+    t.decimal  "alpha_lng",  :precision => 11, :scale => 8
   end
 
   create_table "microposts", :force => true do |t|

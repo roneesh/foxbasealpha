@@ -36,6 +36,9 @@ class Alpha < ActiveRecord::Base
 
       points << point
     end
+
+    return points
+
   end
 
 

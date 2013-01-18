@@ -93,8 +93,12 @@ var alpha_id = <%= @alpha.id %>;
     point_holder[1] = "<%= micropost_object.content %>";
     point_holder[2] = <%= micropost_object.micropost_lat %>;
     point_holder[3] = <%= micropost_object.micropost_lng %>;
+    point_holder[4] = "<%= User.find_by_id(micropost_object.user_id).name %>"
+    point_holder[5] = "<%= User.find_by_id(micropost_object.user_id).handle %>"
+
     mp_arr.push(point_holder);
     point_holder = [];
+
   <% end %>
 
 function success(position) {
@@ -118,9 +122,10 @@ function success(position) {
 
   var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 
+
   for (i = 0; i < mp_arr.length; i++) {  
       marker = new google.maps.Marker({
-        content: mp_arr[i][1],
+        title: mp_arr[i][1],
         position: new google.maps.LatLng(mp_arr[i][2], mp_arr[i][3]),
         map: map
       });
