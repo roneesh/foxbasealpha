@@ -83,21 +83,21 @@
 
 <script>
 
-var alpha_id = <%= @alpha.id %>;
+  var alpha_id = <%= @alpha.id %>;
   var url_string = "/alphas/" + alpha_id + ".json";
   var mp_arr = [];
 
-  <% @microposts.each do |micropost_object| %>
-    var point_holder = [];
-    point_holder[0] = <%= micropost_object.id %>; 
-    point_holder[1] = "<%= micropost_object.content %>";
-    point_holder[2] = <%= micropost_object.micropost_lat %>;
-    point_holder[3] = <%= micropost_object.micropost_lng %>;
-    point_holder[4] = "<%= User.find_by_id(micropost_object.user_id).name %>"
-    point_holder[5] = "<%= User.find_by_id(micropost_object.user_id).handle %>"
+  <% @points.each do |point| %>
+    // var point_holder = [];
+    // point_holder[0] = <%#= micropost_object.id %>; 
+    // point_holder[1] = "<%#= micropost_object.content %>";
+    // point_holder[2] = <%#= micropost_object.micropost_lat %>;
+    // point_holder[3] = <%#= micropost_object.micropost_lng %>;
+    // point_holder[4] = "<%#= User.find_by_id(micropost_object.user_id).name %>"
+    // point_holder[5] = "<%#= User.find_by_id(micropost_object.user_id).handle %>"
 
-    mp_arr.push(point_holder);
-    point_holder = [];
+    mp_arr.push(point);
+    // point_holder = [];
 
   <% end %>
 
@@ -110,7 +110,7 @@ function success(position) {
     
   document.querySelector('article').appendChild(mapcanvas);
   
-  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var latlng = new google.maps.LatLng(<%= @alpha.alpha_lat %>, <%= @alpha.alpha_lng %>);
   
   var myOptions = {
     zoom: 15,

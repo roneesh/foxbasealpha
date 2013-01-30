@@ -9,6 +9,17 @@ class User < ActiveRecord::Base
   has_many :microposts
   has_many :whitelists
 
+  after_destroy :remove_all_whitelists_attached_to_user_at_destroy
+  after_destroy :remove_all_microposts_attached_to_user_at_destroy
+
   has_secure_password
+
+  def remove_all_whitelists_attached_to_user_at_destroy
+    Whitelist.where(user_id: self.id).destroy_all
+  end
+
+  def remove_all_microposts_attached_to_user_at_destroy
+  	Micropost.where(user_id: self.id).destroy_all
+  end
 
 end

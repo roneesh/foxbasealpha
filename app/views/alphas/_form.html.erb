@@ -23,7 +23,39 @@
     <%= f.radio_button(:isprivate, false) %>
   </div>
 
+  <div class="field">
+    <%= f.label(:alpha_lat, "Alpha's source Latitude") %>
+    <%= f.text_field :alpha_lat %>
+    <%= f.label(:alpha_lng, "Alpha's source Longitude") %>
+    <%= f.text_field :alpha_lng %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script>
+
+function success(position) {
+  var lat = document.getElementById('alpha_alpha_lat');
+  var lng = document.getElementById('alpha_alpha_lng')
+  var acc = document.getElementById('accuracy')
+  lat.value = position.coords.latitude;
+  lng.value = position.coords.longitude;
+  acc.innerHTML = "Accurate to " + position.coords.accuracy + " meters";
+}
+
+function error(msg) {
+  var s = document.querySelector('#status');
+  s.innerHTML = typeof msg == 'string' ? msg : "failed";
+  s.className = 'fail';
+}
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(success, error);
+} else {
+  error('not supported');
+}
+
+</script>

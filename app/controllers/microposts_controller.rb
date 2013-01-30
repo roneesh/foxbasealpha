@@ -6,7 +6,7 @@ class MicropostsController < ApplicationController
   before_filter :ensure_logged_in
 
    def ensure_logged_in
-    if !session[:user_id]
+    unless session[:user_id]
       flash[:message] = "You are not logged in, please log in."
       redirect_to session_new_url
       return

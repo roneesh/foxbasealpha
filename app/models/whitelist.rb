@@ -5,6 +5,7 @@ class Whitelist < ActiveRecord::Base
   belongs_to :user
 
   # validates :user_id && :alpha_id, :uniqueness => true, :on => :create
- validates :user_id, :uniqueness => { :scope => :alpha_id,
+  validates :user_id, :uniqueness => { :scope => :alpha_id,
     :message => "only one whitelist entry per user/alpha combination" }
+
 end

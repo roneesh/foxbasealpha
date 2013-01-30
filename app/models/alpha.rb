@@ -1,13 +1,14 @@
 class Alpha < ActiveRecord::Base
-  attr_accessible :name, :admin_id, :isprivate
+  attr_accessible :name, :admin_id, :isprivate, :alpha_lat, :alpha_lng
 
   has_many :microposts
   has_many :whitelists
   has_many :users, :through => :whitelists
 
-  after_create :add_creator_to_whitelist
-
   before_create :no_duplicate_entries
+  after_create :add_creator_to_whitelist
+  after_destroy :remove_all_microposts_attached_to_alpha_at_destroy
+  after_destroy :remove_all_whitelist_entries_at_destroy
 
   validates_presence_of :name
 
@@ -22,7 +23,11 @@ class Alpha < ActiveRecord::Base
   end
 
   def remove_all_whitelist_entries_at_destroy
+    Whitelist.where(alpha_id: self.id).destroy_all
+  end
 
+  def remove_all_microposts_attached_to_alpha_at_destroy
+    Micropost.where(alpha_id: self.id).destroy_all
   end
 
   def points
@@ -33,7 +38,9 @@ class Alpha < ActiveRecord::Base
       point = []
       point[0] = micropost.micropost_lat
       point[1] = micropost.micropost_lng
-
+      point[2] = micropost.content
+      point[3] = User.find_by_id(micropost.user_id).name
+      point[4] = User.find_by_id(micropost.user_id).handle
       points << point
     end
 

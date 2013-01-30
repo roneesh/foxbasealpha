@@ -15,15 +15,18 @@ class UsersController < ApplicationController
   end
 
   def ensure_correct_user
+    user = User.find_by_id(session[:user_id])
+    unless user.site_admin
       if session[:user_id] != params[:id].to_i
         flash[:message] = "You are not authorized to see/edit/delete any other User's information."
         redirect_to user_url(session[:user_id])
+      end
     end
   end
 
   def ensure_site_admin
     user = User.find_by_id(session[:user_id])
-      if !user.site_admin
+      unless user.site_admin
         flash[:message] = "User list only available to admins"
         redirect_to user_url(session[:user_id])        
     end
