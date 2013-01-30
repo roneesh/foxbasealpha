@@ -4,18 +4,18 @@ CURRENT TO-DO
   2. Geolocate with googlemaps API (seems more accurate than HTML5, but more complex to do).
   3. Log-ins with Google ID
 
-Running Notes:
+BUSINESS RULES:
 
-Fox Base Alpha
-
-- A communications platform for sending Geo-tagged micro-posts
-- A user sends out a message that has a lat/lng coordinates attached
-- That message is also part of an alpha 
+- A communications platform for sending Geo-tagged micro-posts *DONE*
+- A user sends out a message that has a lat/lng coordinates attached *DONE*
+- That message is also part of an alpha  *DONE*
 - An alpha is a bank of messages *DONE*
 - An alpha is public or private *DONE*
 - Any user can send to a public alpha *DONE*
 - Private alphas only allow certain users *DONE*
 - A user can create an alpha *DONE*
+- A Private alpha has an admin who can add users to a whitelist *DONE*
+- An Alpha has a source location
 
 MODELS:
 
