@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118230442) do
+ActiveRecord::Schema.define(:version => 20130130215259) do
 
   create_table "alphas", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130118230442) do
     t.boolean  "isprivate",                                 :default => false
     t.decimal  "alpha_lat",  :precision => 11, :scale => 8
     t.decimal  "alpha_lng",  :precision => 11, :scale => 8
+    t.integer  "radius"
   end
 
   create_table "microposts", :force => true do |t|

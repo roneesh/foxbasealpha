@@ -1,5 +1,5 @@
 class Alpha < ActiveRecord::Base
-  attr_accessible :name, :admin_id, :isprivate, :alpha_lat, :alpha_lng
+  attr_accessible :name, :admin_id, :isprivate, :alpha_lat, :alpha_lng, :radius
 
   has_many :microposts
   has_many :whitelists
@@ -45,9 +45,10 @@ class Alpha < ActiveRecord::Base
     end
 
     return points
-
   end
 
-
+  def nearby_microposts
+    microposts = Micropost.where(alpha_id: self.id)
+  end
 
 end

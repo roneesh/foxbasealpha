@@ -15,7 +15,7 @@ BUSINESS RULES:
 - Private alphas only allow certain users *DONE*
 - A user can create an alpha *DONE*
 - A Private alpha has an admin who can add users to a whitelist *DONE*
-- An Alpha has a source location
+- An Alpha has a source location, with a radius in meters that it accepts messags for
 
 MODELS:
 

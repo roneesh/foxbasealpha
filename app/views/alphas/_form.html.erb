@@ -28,6 +28,8 @@
     <%= f.text_field :alpha_lat %>
     <%= f.label(:alpha_lng, "Alpha's source Longitude") %>
     <%= f.text_field :alpha_lng %>
+    <%= f.label(:radius, "Alpha's size (in meters)") %>
+    <%= f.text_field :radius, value: 200 %>
   </div>
 
   <div class="actions">
@@ -53,7 +55,7 @@ function error(msg) {
 }
 
 if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(success, error);
+  navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy:true});
 } else {
   error('not supported');
 }

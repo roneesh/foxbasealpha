@@ -11,6 +11,10 @@
   <%= @alpha.alpha_lng %> longitude
 </p>
 <p>
+  <b> Alpha Size: </b>
+  <%= @alpha.radius %> m
+</p>
+<p>
   <b>Alpha Protection status:</b>
   <% if @alpha.isprivate %>
   	Private
@@ -117,7 +121,12 @@ function success(position) {
   document.querySelector('article').appendChild(mapcanvas);
   
   var latlng = new google.maps.LatLng(<%= @alpha.alpha_lat %>, <%= @alpha.alpha_lng %>);
-  
+  marker = new google.maps.Marker({
+    title: "Alpha Source Location",
+    position: latlng,
+    map: map,
+  });
+
   var myOptions = {
     zoom: 15,
     center: latlng,
