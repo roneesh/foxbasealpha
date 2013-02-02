@@ -1,3 +1,5 @@
+adding to readme for example!
+
 CURRENT TO-DO
 
   1. Geolocate with HTML5
