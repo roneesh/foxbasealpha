@@ -12,3 +12,6 @@
  *= require_tree .
  */
 
+html {
+	font-family: 'Archivo Black', sans-serif;
+}

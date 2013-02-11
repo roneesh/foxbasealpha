@@ -1,0 +1,14 @@
+%h1 Enter Fox Base Alpha
+
+%p Login
+
+%p= form_tag session_create_url
+
+%p= label_tag :email, "Email:"
+%p= text_field_tag :email
+
+%p= label_tag :password, "Password:" 
+%p=	password_field_tag :password
+
+%p= submit_tag "Login as user"
+%p= link_to "Not a user? Sign-up", new_user_url

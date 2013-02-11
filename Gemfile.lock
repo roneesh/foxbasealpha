@@ -44,6 +44,7 @@ GEM
     gon (4.0.2)
       actionpack (>= 2.3.0)
       json
+    haml (3.1.7)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -112,6 +113,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)
   gon
+  haml
   jquery-rails
   pg
   rails (= 3.2.11)
