@@ -10,4 +10,15 @@
  *
  *= require_self
  *= require_tree .
+ *= require base/normalize
+ *= require base/typography
+ *= require base/layout
+ *= require components/alerts
+ *= require components/buttons
+ *= require components/forms
+ *= require components/list
+ *= require components/nav
+ *= require components/tables
+ *= require modules/footer
+ *= require modules/header
  */
