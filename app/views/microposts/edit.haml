@@ -1,0 +1,23 @@
+%h1 Editing micropost
+
+= form_for @micropost, :url => user_micropost_path(@user_id, @micropost.id), :method => :put do |f|
+  - if @micropost.errors.any?
+    %div#error_explanation
+      %h2 = pluralize(@micropost.errors.count, "error") %> prohibited this micropost from being saved:
+      %ul
+        -@micropost.errors.full_messages.each do |msg|
+          %li = msg
+
+  .field
+    = f.label :content
+    %br
+    = f.text_field :content
+
+  .field
+    = f.label :anonymous, "Post anonymously"
+    = f.check_box :anonymous, value: true
+  .actions
+    = f.submit
+    
+= link_to 'Show', user_micropost_path(@user_id, @micropost.id)
+= link_to 'Back', user_microposts_path(@user_id)

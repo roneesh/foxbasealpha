@@ -143,6 +143,7 @@ def new_alpha_user
   @whitelist = Whitelist.new
   @alpha_id = params[:alpha_id]
   @users = User.all
+  @user = User.find_by_id(session[:user_id])
 end
 
 def new_alpha_user_create

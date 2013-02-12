@@ -13,7 +13,9 @@
 	-@user_microposts.each do |user_micropost|
 		%li
 			-if user_micropost.anonymous
-				%p You anonymously said... 
+				%p 
+					You anonymously said... 
+					= user_micropost.content
 			-else
 				%p
 					You said
