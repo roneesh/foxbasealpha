@@ -1,0 +1,15 @@
+%h1 New alpha user
+
+= form_for @whitelist, :url => "/alphas/#{@alpha_id}/user/create", :method => :post do |f| 
+
+  .field
+    = f.hidden_field :alpha_id, value: @alpha_id
+  .field
+    =f.label :user_id, "Add a user"
+    %br
+    =f.collection_select :user_id, @users, :id, :name 
+  
+  .actions
+    = f.submit "Add user to Whitelist"
+
+= link_to 'Back', alphas_path 

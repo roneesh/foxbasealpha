@@ -1,0 +1,13 @@
+%p#notice 
+	=notice
+
+%p
+	%b Content:
+	= @micropost.content 
+
+%p
+	%b User:
+	= link_to @user.handle, user_url(@user.id) 
+
+= link_to 'Edit', edit_user_micropost_path(@micropost.user_id, @micropost.id) 
+= link_to 'Back', user_microposts_path(@micropost.user_id) 
