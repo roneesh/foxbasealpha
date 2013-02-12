@@ -1,0 +1,150 @@
+%p#notice= notice
+
+%p
+  %b Alpha Name:
+  =@alpha.name
+
+%p
+  <b>Alpha Location:</b>
+  = @alpha.alpha_lat 
+  latitude 
+  = @alpha.alpha_lng 
+  longitude
+
+%p
+  <b> Alpha Size: </b>
+  = @alpha.radius  
+  m
+
+%p
+  <b>Alpha Protection status:</b>
+  -if @alpha.isprivate 
+    Private
+  -else
+    Public
+
+%p
+  <b> Alpha Admin: </b>
+  = @admin.name 
+
+-if @alpha.isprivate
+  %p
+    %b Whitelisted Users:
+    -if @users.count >= 1
+      %ul
+        -@users.each do |user_entry|
+          %li
+            =user_entry.name 
+            -if user_entry.id == @alpha.admin_id 
+              is admin
+    -else
+      None
+
+.microposts
+  %p 
+    <b>Alpha Microposts:</b>
+    %ul
+      -@microposts.each do |micropost_object| 
+        %li
+          -if micropost_object.anonymous 
+            %p Anonymous says... 
+          -else 
+            %p
+              =link_to micropost_object.user.handle, user_microposts_path(micropost_object.user_id)
+              says...
+          %p= micropost_object.content 
+          %p
+            Coordinates: 
+            =micropost_object.micropost_lat
+            lat / 
+            =micropost_object.micropost_lng
+            lng 
+
+%div#map
+  %b Micropost Locations:
+  %br
+
+%div#data_a
+
+  -if @alpha.isprivate && @alpha.admin_id == session[:user_id]
+    =link_to 'Add User', new_alpha_user_path(@alpha.id)
+  
+  -if @alpha.admin_id == session[:user_id] 
+    =link_to 'Edit Alpha', edit_alpha_path(@alpha)
+  
+  =link_to 'Back to Alphas', alphas_path 
+
+%article
+  %p
+    Finding your location: <span id="status">checking...</span>
+
+%script(type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false")
+
+%render(alpha_show)
+
+// :javascript
+
+//   var alpha_id = #{@alpha.id};
+//   var url_string = "/alphas/" + alpha_id + ".json";
+//   var mp_arr = [];
+
+  
+//   -@microposts.each do |micropost_object|
+//     var point_holder = [];
+//     point_holder[0] = "#{micropost_object.id}"; 
+//     point_holder[1] = "#{micropost_object.content}";
+//     point_holder[2] = "#{micropost_object.micropost_lat}";
+//     point_holder[3] = "#{micropost_object.micropost_lng}";
+//     point_holder[4] = "#{User.find_by_id(micropost_object.user_id).name}";
+//     point_holder[5] = "#{User.find_by_id(micropost_object.user_id).handle}";
+
+//     mp_arr.push(point_holder);
+//     point_holder = [];
+  
+//   function success(position) {
+
+//     var mapcanvas = document.createElement('div');
+//     mapcanvas.id = 'mapcanvas';
+//     mapcanvas.style.height = '400px';
+//     mapcanvas.style.width = '560px';
+
+//     document.querySelector('article').appendChild(mapcanvas);
+    
+//     var latlng = new google.maps.LatLng(= @alpha.alpha_lat , = @alpha.alpha_lng );
+//     marker = new google.maps.Marker({
+//       title: "Alpha Source Location",
+//       position: latlng,
+//       map: map
+//     });
+
+//     var myOptions = {
+//       zoom: 15,
+//       center: latlng,
+//       mapTypeControl: false,
+//       navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+//       mapTypeId: google.maps.MapTypeId.ROADMAP
+//     };
+
+//     var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+
+//     for (i = 0; i < mp_arr.length; i++) {  
+//       marker = new google.maps.Marker({
+//         title: mp_arr[i][1],
+//         position: new google.maps.LatLng(mp_arr[i][2], mp_arr[i][3]),
+//         map: map,
+//       });
+//     };
+//   };
+
+//   function error(msg) {
+//     var s = document.querySelector('#status');
+//     s.innerHTML = typeof msg == 'string' ? msg : "failed";
+//     s.className = 'fail';
+//   };
+
+//   if (navigator.geolocation) { 
+//     navigator.geolocation.getCurrentPosition(success, error) 
+//   };
+//   else { 
+//     error('not supported') 
+//   };
