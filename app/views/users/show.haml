@@ -1,0 +1,29 @@
+%p#notice= notice
+
+%p
+	<b>Name:</b>
+	=@user.name
+%p
+	<b>Email:</b>
+	=@user.email
+
+<b>Your last 100 Microposts:</b>
+
+%ol
+	-@user_microposts.each do |user_micropost|
+		%li
+			-if user_micropost.anonymous
+				%p You anonymously said... 
+			-else
+				%p
+					You said
+					= user_micropost.content
+
+		%p
+			on
+			= link_to user_micropost.alpha.name, alpha_url(user_micropost.alpha.id)
+			at
+			= user_micropost.created_at.to_datetime
+
+=link_to 'Edit User Information |', edit_user_path(@user) 
+= link_to ' Back', users_path

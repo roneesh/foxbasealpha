@@ -1,14 +1,19 @@
-%h1 Enter Fox Base Alpha
+.landing_page_container
 
-%p Login
+	%h1.landing_page_title FOX BASE ALPHA
+	
+	.landing_page_form
 
-%p= form_tag session_create_url
-
-%p= label_tag :email, "Email:"
-%p= text_field_tag :email
-
-%p= label_tag :password, "Password:" 
-%p=	password_field_tag :password
-
-%p= submit_tag "Login as user"
-%p= link_to "Not a user? Sign-up", new_user_url
+		=form_tag session_create_url
+	
+		.landing_page_labels
+			%p= label_tag :email, "Email:"
+			%p= label_tag :password, "Password:"	
+		
+		.landing_page_fields
+			%p= text_field_tag :email 	
+			%p= password_field_tag :password
+		
+		.initiate_connect= submit_tag "Initiate Connect"
+	
+	=link_to "Not a user? Sign-up", new_user_url

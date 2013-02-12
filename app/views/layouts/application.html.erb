@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>Foxbasealpha</title>
-  <%# include gon %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -18,10 +17,9 @@
 		<%= link_to "Alphas", alphas_url %> |
 		<%= link_to "New Micropost", new_user_micropost_url(session[:user_id]) %> |
 		<%= link_to "User Dashboard", user_url(session[:user_id]) %>
-
 	<% else %>
-		<%= link_to "Log in", session_new_url %>
-	<%end> %>
+		<%#= link_to "Log in", session_new_url %>
+	<% end %>
   </navigation>
 
 <%= yield %>
