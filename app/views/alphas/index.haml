@@ -1,41 +1,35 @@
-%h1 Listing alphas
 
-%table
-  %tr
-    %th Name
-    %th Protection Status
-    %th 
-    %th 
-    %th 
+.block_container.clearfix
+  %h1 
+    Alphas /
+    %a= link_to 'New Alpha', new_alpha_path 
 
   -@public_alphas.each do |alpha| 
-    %tr
-      %td 
+    .block 
+      %p
         =alpha.name 
-      %td Public
-      %td 
+        %br
+        Public
+        %br 
         =link_to 'Show', alpha 
-      -if alpha.admin_id == session[:user_id] 
-        %td 
+        -if alpha.admin_id == session[:user_id]  
+          /
           =link_to 'Edit', edit_alpha_path(alpha) 
-        %td 
+          /
           =link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } 
 
   -@private_alphas.each do |alpha| 
-    %tr
-      %td 
+    .block
+      %p
         =alpha.name 
-      %td Private
-      %td 
+        %br
+        Private
+        %br 
         =link_to 'Show', alpha 
-      -if alpha.admin_id == session[:user_id] 
-        %td 
-          =link_to 'Edit', edit_alpha_path(alpha) 
-        %td 
-          =link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } 
-          -if alpha.admin_id == session[:user_id] 
-            \-- you are admin
-
-%br
-
-= link_to 'New Alpha', new_alpha_path 
+        -if alpha.admin_id == session[:user_id] 
+          %td 
+            =link_to 'Edit', edit_alpha_path(alpha) 
+          %td 
+            =link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } 
+            -if alpha.admin_id == session[:user_id] 
+              \-- you are admin

@@ -1,60 +1,83 @@
 %p#notice= notice
 
-.alpha_title_block
+%h1.alpha_title
+  =@alpha.name
 
-  .name_and_admin
-    
-    %p
-      %b Alpha Name:
-      =@alpha.name
+.alpha_title_block.clearfix
 
-    %p
-      %b Admin:
-      = @admin.handle 
+  .one_by_two_block
 
-  .location_information
-    %p
-      .Address
-        %b Adresss:
-        Address here!
-      .Size
-        <b> Alpha Size: </b>
-        = @alpha.radius  
-        m
-    %p  
-      = @alpha.alpha_lat 
-      latitude /
-      = @alpha.alpha_lng 
-      longitude
-
-  .protection_and_users
-
-    %p
-      <b>Alpha Protection status:</b>
-      -if @alpha.isprivate 
-        Private
-      -else
-        Public
-
-
-
-    -if @alpha.isprivate
+    .title_sub_block
       %p
-        %b Whitelisted Users:
-        -if @users.count >= 1
-          %ul
-            -@users.each do |user_entry|
-              %li
-                =user_entry.name 
-                -if user_entry.id == @alpha.admin_id 
-                  is admin
-        -else
-          None
+        Address here!
 
-.microposts
+    .title_sub_block
+      %p
+        = @alpha.radius  
+        m access radius 
+
+  .one_by_two_block#no_margin
+
+    .title_sub_block
+      %p  
+        = @alpha.alpha_lat 
+        %b Lat.
+
+    .title_sub_block
+      %p
+        = @alpha.alpha_lng
+        %b Lng.
+
+  .three_by_one_block
+
+    .title_sub_block
+      %p
+        %b Admin
+        %br
+        = @admin.handle
+
+    .title_sub_block
+      %p
+        -if @alpha.isprivate 
+          %b Private
+        -else
+        %b Public 
+        %br
+        Any can post
+
+    .title_sub_block
+      %p
+        %b= @alpha.microposts.count
+        %b posts 
+        %br
+        by
+        %br
+        %b= @alpha.users.count
+        -if @alpha.users.count <= 1
+          %b user
+        -else
+          %b users
+
+/ .title_sub_block
+/   -if @alpha.isprivate
+/     %p
+/       %b Whitelisted Users:
+/       -if @users.count >= 1
+/         %ul
+/           -@users.each do |user_entry|
+/             %li
+/               =user_entry.name 
+/               -if user_entry.id == @alpha.admin_id 
+/                 is admin
+/       -else
+/         None
+        
+
+.alpha_microposts
   %p 
+    %section
     <b>Alpha Microposts:</b>
-    %ul
+    %ul.micropost
       -@microposts.each do |micropost_object| 
         %li
           -if micropost_object.anonymous 
@@ -70,8 +93,14 @@
             lat / 
             =micropost_object.micropost_lng
             lng 
+    %section
 
-%div#map
+    %aside      
+    <b>Date & Time</b>
+    
+            
+
+%div#map.clearfix
   %b Micropost Locations:
   %br
 

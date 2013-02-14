@@ -1,29 +1,46 @@
-$horizontal-border: 5px solid black
-$vertical-border: 5px solid black
+$border: 1px dotted black
+$vertical-border: 3px solid black
+
+
+.alpha_title
+  font-size: 5em
 
 .alpha_title_block
   max-width: 960px
 
-.name_and_admin
-  border-top: $horizontal-border
-  border-bottom: $horizontal-border
-  border-left: $vertical-border
-  margin-left: 1.041666667%
+.title_sub_block
+  text-align: center
   float: left
-  position: relative
-  width: 20.83333333%
+  margin: 0
+  pading: 0
 
-.location
-  border-top: $horizontal-border
-  border-bottom: $horizontal-border
-  border-left: $vertical-border
-  float: left
-  width: 56%
+.alpha_microposts
+  clear: both
 
-.protection_and_users
-  border-top: $horizontal-border
-  border-bottom: $horizontal-border
-  border-left: $vertical-border
-  margin-right: 1.041666667%
+.one_by_two_block
   float: left
-  width: 20.83333333%
+  width: 24%
+  padding: 0
+  border: $border
+  border-bottom: 0
+  margin-left: 1%
+  .title_sub_block
+    float: left
+    height: 50px
+    width: 100%
+    border-bottom: $border
+
+#no_margin
+  margin-left: 0
+
+.three_by_one_block
+  float: left
+  width: 50%
+  margin: 0
+  padding: 0
+  .title_sub_block
+    float: left
+    height: 100px
+    width: 30%
+    vertical-align: center
+    border: $border
