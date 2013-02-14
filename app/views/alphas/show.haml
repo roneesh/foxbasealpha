@@ -40,10 +40,11 @@
     -else
       None
 
-.microposts
+.alpha_microposts
   %p 
+    %section
     <b>Alpha Microposts:</b>
-    %ul
+    %ul.micropost
       -@microposts.each do |micropost_object| 
         %li
           -if micropost_object.anonymous 
@@ -59,8 +60,14 @@
             lat / 
             =micropost_object.micropost_lng
             lng 
+    %section
 
-%div#map
+    %aside      
+    <b>Date & Time</b>
+    
+            
+
+%div#map.clearfix
   %b Micropost Locations:
   %br
 
