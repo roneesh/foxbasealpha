@@ -1,0 +1,41 @@
+%h1 Listing alphas
+
+%table
+  %tr
+    %th Name
+    %th Protection Status
+    %th 
+    %th 
+    %th 
+
+  -@public_alphas.each do |alpha| 
+    %tr
+      %td 
+        =alpha.name 
+      %td Public
+      %td 
+        =link_to 'Show', alpha 
+      -if alpha.admin_id == session[:user_id] 
+        %td 
+          =link_to 'Edit', edit_alpha_path(alpha) 
+        %td 
+          =link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } 
+
+  -@private_alphas.each do |alpha| 
+    %tr
+      %td 
+        =alpha.name 
+      %td Private
+      %td 
+        =link_to 'Show', alpha 
+      -if alpha.admin_id == session[:user_id] 
+        %td 
+          =link_to 'Edit', edit_alpha_path(alpha) 
+        %td 
+          =link_to 'Destroy', alpha, method: :delete, data: { confirm: 'Are you sure?' } 
+          -if alpha.admin_id == session[:user_id] 
+            \-- you are admin
+
+%br
+
+= link_to 'New Alpha', new_alpha_path 

@@ -1,0 +1,32 @@
+= form_for(@alpha) do |f|
+  - if @alpha.errors.any?
+    %div#error_explanation
+      %h2
+        = pluralize(@alpha.errors.count, "error") 
+        prohibited this alpha from being saved:
+      %ul
+        - @alpha.errors.full_messages.each do |msg| 
+          %li = msg 
+
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  .field
+    = f.label(:isprivate, "Make Alpha Private") 
+    = f.radio_button(:isprivate, true) 
+    = f.label(:isprivate, "Make Alpha Public") 
+    = f.radio_button(:isprivate, false) 
+
+  .field
+    = f.label(:alpha_lat, "Alpha's source Latitude") 
+    = f.text_field :alpha_lat 
+    = f.label(:alpha_lng, "Alpha's source Longitude") 
+    = f.text_field :alpha_lng 
+    = f.label(:radius, "Alpha's size (in meters)") 
+    = f.text_field :radius, value: 200 
+
+  .actions
+    = f.submit 
+
+%script(type="text/javascript" src="alpha_location.js")

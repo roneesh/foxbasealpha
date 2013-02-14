@@ -59,28 +59,5 @@
   <p id="accuracy"></p>
 </article>
 
-<script>
-
-function success(position) {
-  var lat = document.getElementById('micropost_micropost_lat');
-  var lng = document.getElementById('micropost_micropost_lng')
-  var acc = document.getElementById('accuracy')
-  lat.value = position.coords.latitude;
-  lng.value = position.coords.longitude;
-  acc.innerHTML = "Accurate to " + position.coords.accuracy + " meters";
-}
-
-function error(msg) {
-  var s = document.querySelector('#status');
-  s.innerHTML = typeof msg == 'string' ? msg : "failed";
-  s.className = 'fail';
-}
-
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy:true});
-} else {
-  error('not supported');
-}
-
-</script>
-
+<!-- <script type="text/javascript" src="alpha_location.js.coffee".></script>
+ -->
