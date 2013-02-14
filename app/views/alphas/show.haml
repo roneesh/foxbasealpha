@@ -42,28 +42,24 @@
 
 .alpha_microposts
   %p 
-    %section
-    <b>Alpha Microposts:</b>
-    %ul.micropost
-      -@microposts.each do |micropost_object| 
-        %li
-          -if micropost_object.anonymous 
-            %p Anonymous says... 
-          -else 
+    %div.post.clearfix
+      <b>Alpha Microposts:</b>
+      %ul.micropost
+        -@microposts.each do |micropost_object| 
+          %li.each_post
+            -if micropost_object.anonymous 
+              %p Anonymous says... 
+            -else 
+              %p
+                =link_to micropost_object.user.handle, user_microposts_path(micropost_object.user_id)
+                says...
+            %p= micropost_object.content 
             %p
-              =link_to micropost_object.user.handle, user_microposts_path(micropost_object.user_id)
-              says...
-          %p= micropost_object.content 
-          %p
-            Coordinates: 
-            =micropost_object.micropost_lat
-            lat / 
-            =micropost_object.micropost_lng
-            lng 
-    %section
-
-    %aside      
-    <b>Date & Time</b>
+              Coordinates: 
+              =micropost_object.micropost_lat
+              lat / 
+              =micropost_object.micropost_lng
+              lng 
     
             
 
